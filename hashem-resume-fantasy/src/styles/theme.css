@@ -1,0 +1,259 @@
+/* src/styles/theme.css */
+
+/* -----------------------------
+   Fonts (fantasy but readable)
+   ----------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=IM+Fell+English:ital@0;1&display=swap");
+
+/* -----------------------------
+   Theme tokens
+   ----------------------------- */
+:root {
+  --obsidian: 9 11 16;
+  --parchment: 236 229 209;
+  --ink: 20 22 28;
+
+  --gold: 212 175 55;
+  --amber: 220 155 55;
+  --violet: 122 87 255;
+  --cyan: 88 212 255;
+
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-2: rgba(255, 255, 255, 0.09);
+  --stroke: rgba(255, 255, 255, 0.12);
+  --stroke-2: rgba(255, 255, 255, 0.18);
+}
+
+/* -----------------------------
+   Base helpers
+   ----------------------------- */
+.bg-obsidian {
+  background-color: rgb(var(--obsidian));
+}
+
+.text-parchment {
+  color: rgb(var(--parchment));
+}
+
+/* Letterspacing used for "WELCOME, TRAVELER" */
+.letterspace {
+  letter-spacing: 0.28em;
+}
+
+/* -----------------------------
+   Background: “fantasy hall”
+   (soft aurora + candlelight)
+   ----------------------------- */
+.bg-aurora {
+  background:
+    radial-gradient(900px 520px at 18% 16%, rgba(var(--gold), 0.20), transparent 60%),
+    radial-gradient(860px 520px at 82% 12%, rgba(var(--violet), 0.18), transparent 60%),
+    radial-gradient(1000px 680px at 50% 105%, rgba(var(--cyan), 0.10), transparent 70%),
+    radial-gradient(900px 650px at 50% 60%, rgba(0,0,0,0.18), rgba(0,0,0,0.70)),
+    linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.82));
+}
+
+/* Rune dust overlay: subtle, not noisy */
+.bg-runes {
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255,255,255,0.06) 0 1px, transparent 2px),
+    radial-gradient(circle at 80% 30%, rgba(255,255,255,0.05) 0 1px, transparent 2px),
+    radial-gradient(circle at 45% 65%, rgba(255,255,255,0.04) 0 1px, transparent 2px),
+    radial-gradient(circle at 65% 55%, rgba(255,255,255,0.03) 0 1px, transparent 2px);
+  background-size: 260px 260px, 280px 280px, 320px 320px, 420px 420px;
+  opacity: 1;
+  mix-blend-mode: overlay;
+}
+
+/* -----------------------------
+   Glass / arcane border utility
+   ----------------------------- */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(10px);
+}
+
+.rune-border {
+  position: relative;
+}
+.rune-border::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 999px;
+  padding: 1px;
+  background: linear-gradient(
+    120deg,
+    rgba(var(--gold), 0.40),
+    rgba(var(--violet), 0.26),
+    rgba(var(--cyan), 0.18)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* -----------------------------
+   “Open Codex” Button
+   ----------------------------- */
+.arcane-btn {
+  position: relative;
+  border-radius: 999px;
+  padding: 12px 22px;
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 18px 45px rgba(0,0,0,0.45);
+  transition: transform 200ms ease, background 200ms ease, box-shadow 200ms ease, filter 200ms ease;
+}
+
+.arcane-btn::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 999px;
+  padding: 1px;
+  background: linear-gradient(
+    120deg,
+    rgba(var(--gold), 0.55),
+    rgba(var(--violet), 0.30),
+    rgba(var(--cyan), 0.20)
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.arcane-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.10);
+  box-shadow: 0 26px 75px rgba(0,0,0,0.55);
+  filter: saturate(1.05);
+}
+
+.arcane-btn:active {
+  transform: translateY(0px);
+}
+
+/* -----------------------------
+   CODEx: no box, real spotlight
+   ----------------------------- */
+.codex-stage {
+  position: relative;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 18px 0;
+}
+
+/* Soft spotlight behind the book */
+.codex-spotlight {
+  position: absolute;
+  inset: -30%;
+  background:
+    radial-gradient(closest-side at 50% 52%, rgba(var(--gold), 0.16), transparent 60%),
+    radial-gradient(closest-side at 50% 52%, rgba(255,255,255,0.08), transparent 58%),
+    radial-gradient(closest-side at 50% 62%, rgba(var(--violet), 0.10), transparent 66%);
+  filter: blur(2px);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+/* Slight “floor haze” to ground the object */
+.codex-floor {
+  position: absolute;
+  bottom: 26px;
+  width: min(520px, 80vw);
+  height: 90px;
+  background: radial-gradient(closest-side, rgba(0,0,0,0.55), transparent 70%);
+  filter: blur(6px);
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+/* Clickable book wrapper (no rectangle card) */
+.codex-link {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.codex-link:focus-visible {
+  outline: 2px solid rgba(255,255,255,0.25);
+  outline-offset: 10px;
+  border-radius: 18px;
+}
+
+/* The book image */
+.codex-img {
+  width: clamp(360px, 42vw, 620px);
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+  display: block;
+  filter:
+    drop-shadow(0 26px 55px rgba(0,0,0,0.75))
+    drop-shadow(0 0 18px rgba(var(--gold), 0.10));
+  transform: translateY(0) rotate(-0.5deg);
+  transition: transform 260ms ease, filter 260ms ease;
+}
+/* Hover: float + slightly “alive” */
+.codex-link:hover .codex-img {
+  transform: translateY(-10px) rotate(0.3deg) scale(1.01);
+  filter:
+    drop-shadow(0 36px 75px rgba(0,0,0,0.85))
+    drop-shadow(0 0 28px rgba(var(--gold), 0.16));
+}
+
+/* Shimmer sweep across the book */
+.codex-shimmer {
+  position: absolute;
+  inset: -55%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(var(--gold), 0.18) 48%,
+    rgba(255,255,255,0.12) 50%,
+    rgba(var(--cyan), 0.10) 52%,
+    transparent 60%
+  );
+  transform: translateX(-60%) rotate(12deg);
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.codex-link:hover .codex-shimmer {
+  opacity: 1;
+  animation: codexShimmer 1.05s ease-out forwards;
+}
+
+@keyframes codexShimmer {
+  from { transform: translateX(-60%) rotate(12deg); }
+  to   { transform: translateX(55%) rotate(12deg); }
+}
+
+/* Subtle breathing glow (very light) */
+.codex-breathe {
+  animation: codexBreathe 5.8s ease-in-out infinite;
+}
+
+@keyframes codexBreathe {
+  0%, 100% { filter: drop-shadow(0 26px 55px rgba(0,0,0,0.75)) drop-shadow(0 0 16px rgba(var(--gold), 0.10)); }
+  50%      { filter: drop-shadow(0 28px 60px rgba(0,0,0,0.78)) drop-shadow(0 0 22px rgba(var(--gold), 0.14)); }
+}
+
+/* -----------------------------
+   Optional: parchment highlight
+   (use on small text sections)
+   ----------------------------- */
+.parchment-muted {
+  color: rgba(255,255,255,0.70);
+  text-shadow: 0 12px 35px rgba(0,0,0,0.55);
+}
