@@ -17,11 +17,11 @@ export default function Landing() {
 
           <h1 className="mt-5 font-display text-4xl font-semibold tracking-tight md:text-6xl">
             You have stumbled upon{" "}
-            <span className="text-white">Hashem Abdelati’s</span> resume.
+            <span className="text-white">Hashem Abdelati’s</span> portfolio.
           </h1>
 
           <p className="mx-auto mt-5 max-w-2xl font-body text-lg text-white/75">
-            Enter the codex to explore: character sheet, quests, skill tree, and raven contact.
+            Enter the codex to explore: character sheet, job experience, projects, skill tree, and raven contact.
           </p>
         </div>
 
