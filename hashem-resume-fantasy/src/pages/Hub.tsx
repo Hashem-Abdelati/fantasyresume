@@ -22,7 +22,7 @@ export default function Hub() {
         subtitle: "Character Sheet",
         progress: "0 / 10",
         route: "/about",
-        icon: "🜁",
+        icon: "𓁍",
       },
       {
         key: "projects",
@@ -35,7 +35,7 @@ export default function Hub() {
       {
         key: "experience",
         title: "WORK EXPERIENCE",
-        subtitle: "Skill Tree",
+        subtitle: "Journey",
         progress: "0 / 8",
         route: "/experience",
         icon: "⚔",
@@ -46,7 +46,7 @@ export default function Hub() {
         subtitle: "Send Raven",
         progress: "0 / 4",
         route: "/contact",
-        icon: "🕊",
+        icon: "𓅨",
       },
     ],
     []

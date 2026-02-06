@@ -27,15 +27,18 @@ export default function Landing() {
 
         {/* The actual book */}
         <div className="codex-stage">
-        <span className="codex-spotlight" />
-        <span className="codex-floor" />
+          <span className="codex-spotlight" />
+          <span className="codex-floor" />
 
-        <button onClick={() => nav("/hub")} className="codex-link" aria-label="Open the Codex">
+          <button
+            onClick={() => nav("/hub")}
+            className="codex-link codex-float"
+            aria-label="Open the Codex"
+          >
             <span className="codex-shimmer" />
-            <img src={codexImg} className="codex-img codex-breathe" alt="Codex" />
-        </button>
+            <img src={codexImg} className="codex-img" alt="Codex" />
+          </button>
         </div>
-
 
         <p className="mt-12 font-body text-sm text-white/55">
           Built with React + TypeScript + Tailwind.
