@@ -80,13 +80,39 @@ export default function Inventory() {
               Hi there! I’m Hashem. I was born on the 16th of January 2004, and I’m going to tell
               you a bit about myself.
             </p>
+
             <p>
               First things first, speed facts: I’m a twin (me, my twin, and my little sister circa
-              2012), I’m from Amman, Jordan, and I really love fantasy and creative work.
+              2012), I’m from Amman, Jordan, and I love history and how it shaped the world we live in.
+              Things that feel bigger than reality have always drawn me in.
+            </p>
+
+            <p>
+              Family is a huge part of who I am. I’m very close with mine, and a lot of my values
+              come from that connection. Food is part of that too, I love Arabic food, and if I
+              had to choose a favorite, it would probably be mujadara (a rice and lentil dish). Simple, comforting, and
+              impossible to get tired of when it’s done right.
+            </p>
+
+            <p>
+              I’m currently reading <em>A Song of Ice and Fire</em> and I’m on <em>A Clash of Kings</em>.
+              I love stories with layered characters, political tension, and moral ambiguity,
+              the kind that trust the reader to think and sit with complexity.
+            </p>
+
+            <p>
+              I enjoy staying active. I go to the gym regularly, and I’ve always loved horseback riding, it’s one of the few activities
+              that manages to be both calming and intense at the same time. Archery is next on
+              my list; the mix of focus, patience, and precision really appeals to me.
+            </p>
+
+            <p>
+              At the end of the day, I’m someone who enjoys learning, creating, and improving.
+              Whether it’s through code, stories, or new experiences, I like depth, I value
+              connection, and I’m always curious about what I can build next.
             </p>
             <p>
-              Outside of work, I keep hobbies that keep me sane and grounded. Continue exploring
-              the inventory to learn more.
+              Continue exploring the inventory to learn more.
             </p>
 
             <div className="inv-subtitle">Family Snapshot</div>
@@ -111,14 +137,27 @@ export default function Inventory() {
         summary: "Outdoor adventures • mountains • desert",
         content: (
             <div className="inv-diary">
-            <p>
-                There’s nothing quite like the great outdoors (even though as a CS major I rarely get
-                to see it). I love disconnecting and getting away from noise.
-            </p>
-            <p>
-                Whether it’s hiking through mountains or trekking through the desert, I’m always
-                ready for clean air and a reset.
-            </p>
+        <p>
+          There’s nothing quite like the great outdoors (even though, as a CS major, I rarely
+          get to see it). I love disconnecting, slowing down, and getting away from noise —
+          the kind of reset that reminds you there’s more than screens and deadlines.
+        </p>
+
+        <p>
+          I’ve been lucky enough to visit places that really left an impression on me.
+          Yosemite felt unreal, massive granite cliffs, quiet trails, and a sense of scale
+          that makes you feel small in the best way. Costa Rica is probably my favorite place
+          I’ve ever been; the mix of rainforest, wildlife, and ocean made everything feel
+          alive and effortless, it was peace and adventure, I also tried surfing which was so fun.
+          Wadi Rum was something else entirely. I'm proud to call Jordan home and this amazing endless pink desert,
+          that should be talked about more, was a reminder of the beauty and history right in my backyard.
+        </p>
+
+        <p>
+          Whether it’s hiking through mountains, exploring jungles, or trekking through the
+          desert, I’m always ready for clean air and a mental reset. Being outside helps me
+          think more clearly, stay present, and come back to my work with a better headspace.
+        </p>
 
             <div className="inv-subtitle">My Adventures</div>
             <div className="inv-image-grid inv-image-grid--fit">
@@ -181,6 +220,30 @@ export default function Inventory() {
                 </div>
                 <figcaption>Another breathtaking Yosemite view</figcaption>
                 </figure>
+                <figure className="inv-figure inv-figure--fit">
+
+                <div className="inv-img-wrap">
+                  <img
+                    src="/inventory/costabeachsun.HEIC"
+                    alt="Sunset at a beach in Costa Rica"
+                    className="inv-img inv-img--fit"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption>Sunset at a beach in Costa Rica</figcaption>
+              </figure>
+
+              <figure className="inv-figure inv-figure--fit">
+                <div className="inv-img-wrap">
+                  <img
+                    src="/inventory/volcanoincosta.JPG"
+                    alt="Volcano landscape in Costa Rica"
+                    className="inv-img inv-img--fit"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption>Arenal Volcano, Costa Rica.</figcaption>
+              </figure>
             </div>
             </div>
         ),
@@ -193,10 +256,35 @@ export default function Inventory() {
         summary: "Poster photos • favorites • Letterboxd diary",
         content: (
             <div className="inv-diary">
-            <p>
-                I’m that friend who takes photos in front of movie posters and logs everything I watch
-                on Letterboxd.
-            </p>
+              <p>
+                I’m that friend who takes photos in front of movie posters and logs everything I
+                watch on Letterboxd. Movies are one of the ways I slow down and think — not just
+                something to pass the time, but something I return to when I want to feel grounded
+                or reflect a bit.
+              </p>
+
+              <p>
+                Some of my favorite movies stay with me because of how personal or intentional
+                they feel. <em>Sinners</em> was just wow, it stood out to me because it was honest and wasnt afraid to write something insane, and how it
+                trusted the audience without overexplaining itself. <em>The Social Network</em> is
+                one of those movies I can rewatch endlessly. I know what you're thinking youre a CS major of course the social network is up there, but it's the sharp dialogue, quiet tension, the music and a
+                story about ambition that feels just as relevant now as when it came out, it's a lesson for people in the industry.
+              </p>
+
+              <p>
+                <em>Palestine 36</em> means something different to me. It’s not an easy watch whatsoever, but
+                it’s an important one — grounded in history, memory, and perspective. It’s the
+                kind of film that reminds me why cinema matters beyond entertainment. On the other
+                end of the spectrum, <em>Avengers: Endgame</em> represents everything great about
+                shared movie experiences, years of buildup, emotional payoff, and the kind of
+                moment you remember watching with other people for the rest of your life.
+              </p>
+
+              <p>
+                I’m drawn to movies that earn their impact, whether that’s through character,
+                history, or long-term storytelling. I like films that give me something to sit
+                with afterward, and Letterboxd has become my way of keeping track of those moments (scroll down to find me on letter box).
+              </p>
 
             <div className="inv-subtitle">Posters + Recent Watches</div>
             <div className="inv-image-grid inv-image-grid--fit">
