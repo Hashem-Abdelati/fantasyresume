@@ -2,6 +2,12 @@ import { useMemo, useState } from "react";
 
 type QuestStatus = "completed" | "in_progress";
 
+type QuestCompanion = {
+  name: string;
+  role?: string;
+  link?: string;
+};
+
 type Quest = {
   id: string;
   title: string;
@@ -13,9 +19,11 @@ type Quest = {
   approach: string[];
   loot: string[];
   stack: string[];
+  companions?: QuestCompanion[];
   links?: {
     demo?: string;
     repo?: string;
+    paper?: string;
   };
 };
 
@@ -40,7 +48,26 @@ const quests: Quest[] = [
       "Produced a reproducible CV workflow for future architecture comparisons.",
       "Improved reliability of automated building-footprint extraction from satellite data.",
     ],
-    stack: ["Python", "PyTorch", "ResNet-50", "Segmentation", "SpaceNet-2", "Computer Vision"],
+    stack: [
+      "Python",
+      "PyTorch",
+      "ResNet-50",
+      "Segmentation",
+      "SpaceNet-2",
+      "Computer Vision",
+    ],
+    companions: [
+      {
+        name: "Yousra El Zamzami",
+        role: "- SegFormer architecture, data preperation and code review",
+        link: "https://www.linkedin.com/in/yousraelzamzami/",
+      },
+    ],
+    links: {
+      repo: "https://github.com/Hashem-Abdelati/SkyMapper",
+      paper: "../public/csci_4364_6364_F2025_SkyMapper.pdf",
+
+    },
   },
   {
     id: "xv6-shared-memory",
@@ -118,8 +145,8 @@ const quests: Quest[] = [
   objective:
     "Build a full-stack platform that helps users find compatible sports partners and organize pickup games using ranked recommendations based on distance, skill similarity, and schedule overlap.",
   approach: [
-    "Designed a multi-service architecture: React + Tailwind frontend, Node/Express + Prisma + PostgreSQL backend, and a Python FastAPI matchmaking service.",
-    "Implemented recommendation flow where the backend builds sport-filtered candidate pairs, sends features to the ML service (`/rank`), and returns ranked results to the UI.",
+    "Designed a multi-service architecture: React + Tailwind frontend, Node/Express + Prisma + PostgreSQL/AWS backend, and a Python FastAPI matchmaking service.",
+    "Implemented recommendation flow where the backend builds sport-filtered candidate pairs, sends features to the ML service, and returns ranked results to the UI.",
     "Engineered pairwise features using Haversine-based distance similarity, skill-gap similarity, and availability overlap from a 336-slot weekly time-bitset with Jaccard scoring.",
     "Built a resilient ranking pipeline with V2 logistic-regression model scoring (`p_success`) and automatic fallback to deterministic V1 weighted scoring when model artifacts are unavailable.",
     "Delivered core product modules including auth, onboarding, profile editing, sports/facilities, feed, and open-game create/join/cancel workflows.",
@@ -141,6 +168,23 @@ const quests: Quest[] = [
     "FastAPI",
     "scikit-learn",
     "Machine Learning",
+  ],
+  companions: [
+      {
+        name: "Ilinca Hirtopanu",
+        role: "- Co-contributor on frontend and backend development, data flow design, and code review",
+        link: "https://www.linkedin.com/in/ilinca-hirtopanu/",
+      },
+      {
+        name: "Niquita Varier",
+        role: "- Co-contributor on backend development and AWS database management",
+        link: "https://www.linkedin.com/in/niquita-varier/",
+      },
+      {
+        name: "Kurdo Shali",
+        role: "- Co-contributor on machine learning-based recommendation features",
+        link: "https://www.linkedin.com/in/kurdo-shali/",
+      },
   ],
   links: {
     repo: "https://github.com/Hashem-Abdelati/senior-design-ihnk"
@@ -341,6 +385,25 @@ function QuestModal({
           <Section title="Objective">
             <p>{quest.objective}</p>
           </Section>
+      
+        {quest.companions?.length ? (
+          <Section title="Companions">
+            <div className="quest-companions">
+              {quest.companions.map((c) => (
+                <div key={`${c.name}-${c.link ?? ""}`} className="quest-companion">
+                  {c.link ? (
+                    <a href={c.link} target="_blank" rel="noreferrer" className="quest-companion-name">
+                      {c.name}
+                    </a>
+                  ) : (
+                    <span className="quest-companion-name">{c.name}</span>
+                  )}
+                  {c.role ? <span className="quest-companion-role">{c.role}</span> : null}
+                </div>
+              ))}
+            </div>
+          </Section>
+        ) : null}
 
           <Section title="Approach">
             <ul>
@@ -377,6 +440,11 @@ function QuestModal({
                 {quest.links?.repo && (
                   <a href={quest.links.repo} target="_blank" rel="noreferrer">
                     Repository
+                  </a>
+                )}
+                {quest.links?.paper && (
+                  <a href={quest.links.paper} target="_blank" rel="noreferrer">
+                    Paper
                   </a>
                 )}
               </div>

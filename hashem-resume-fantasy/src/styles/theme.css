@@ -1328,12 +1328,37 @@
   box-shadow: 0 0 0 1px rgba(255, 225, 168, 0.2) inset;
 }
 
+.quest-companions {
+  display: grid;
+  gap: 10px;
+}
+
+.quest-companion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.quest-companion-name {
+  color: rgba(255, 236, 202, 0.95);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 214, 138, 0.35);
+  padding-bottom: 2px;
+}
+
+.quest-companion-name:hover {
+  border-bottom-color: rgba(255, 225, 168, 0.72);
+}
+
+
 /* Responsive */
 @media (max-width: 980px) {
   .quest-card {
     grid-column: span 12;
   }
 }
+
 /* ===== NAVBAR FANTASY THEME ===== */
 
 .font-cinzel { font-family: "Cinzel", serif; }
@@ -1970,3 +1995,5 @@
   transform: none !important;
   aspect-ratio: auto !important;
 }
+
+

@@ -114,6 +114,7 @@ export default function Inventory() {
             <p>
               Continue exploring the inventory to learn more.
             </p>
+            <p> - Hashem Abdelati 08/02/2026 </p>
 
             <div className="inv-subtitle">Family Snapshot</div>
                 <figure className="artifact-figure">
@@ -139,8 +140,7 @@ export default function Inventory() {
             <div className="inv-diary">
         <p>
           There’s nothing quite like the great outdoors (even though, as a CS major, I rarely
-          get to see it). I love disconnecting, slowing down, and getting away from noise —
-          the kind of reset that reminds you there’s more than screens and deadlines.
+          get to see it). I love disconnecting, slowing down, and getting away from noise.
         </p>
 
         <p>
@@ -158,6 +158,8 @@ export default function Inventory() {
           desert, I’m always ready for clean air and a mental reset. Being outside helps me
           think more clearly, stay present, and come back to my work with a better headspace.
         </p>
+        <p> - Hashem Abdelati 08/02/2026 </p>
+
 
             <div className="inv-subtitle">My Adventures</div>
             <div className="inv-image-grid inv-image-grid--fit">
@@ -258,23 +260,23 @@ export default function Inventory() {
             <div className="inv-diary">
               <p>
                 I’m that friend who takes photos in front of movie posters and logs everything I
-                watch on Letterboxd. Movies are one of the ways I slow down and think — not just
-                something to pass the time, but something I return to when I want to feel grounded
-                or reflect a bit.
+                watch on Letterboxd. Movies are one of the ways I slow down and think about stories, characters, and the world. 
+                I love how they can transport you to different places, times, and perspectives, and how they can make you feel
+                deeply in just a couple of hours. Plus theyre a good way to relax!
               </p>
 
               <p>
                 Some of my favorite movies stay with me because of how personal or intentional
                 they feel. <em>Sinners</em> was just wow, it stood out to me because it was honest and wasnt afraid to write something insane, and how it
                 trusted the audience without overexplaining itself. <em>The Social Network</em> is
-                one of those movies I can rewatch endlessly. I know what you're thinking youre a CS major of course the social network is up there, but it's the sharp dialogue, quiet tension, the music and a
-                story about ambition that feels just as relevant now as when it came out, it's a lesson for people in the industry.
+                one of those movies I can rewatch forever. I know what you're thinking youre a CS major of course the social network is up there, but it's sharp dialogue, quiet tension, music and plot
+                about ambition that makes it great and feels just as relevant now as when it came out, it's a lesson for people in the industry.
               </p>
 
               <p>
                 <em>Palestine 36</em> means something different to me. It’s not an easy watch whatsoever, but
-                it’s an important one — grounded in history, memory, and perspective. It’s the
-                kind of film that reminds me why cinema matters beyond entertainment. On the other
+                it’s an important one. Its grounded in history, memory, and perspective. It’s the
+                kind of film that reminds me why cinema matters beyond entertainment and how movies can send a message. On the other
                 end of the spectrum, <em>Avengers: Endgame</em> represents everything great about
                 shared movie experiences, years of buildup, emotional payoff, and the kind of
                 moment you remember watching with other people for the rest of your life.
@@ -285,6 +287,8 @@ export default function Inventory() {
                 history, or long-term storytelling. I like films that give me something to sit
                 with afterward, and Letterboxd has become my way of keeping track of those moments (scroll down to find me on letter box).
               </p>
+              <p> - Hashem Abdelati 08/02/2026 </p>
+
 
             <div className="inv-subtitle">Posters + Recent Watches</div>
             <div className="inv-image-grid inv-image-grid--fit">
