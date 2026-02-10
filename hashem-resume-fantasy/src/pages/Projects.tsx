@@ -65,7 +65,7 @@ const quests: Quest[] = [
     ],
     links: {
       repo: "https://github.com/Hashem-Abdelati/SkyMapper",
-      paper: "../public/csci_4364_6364_F2025_SkyMapper.pdf",
+      paper: "/csci_4364_6364_F2025_SkyMapper.pdf",
 
     },
   },
