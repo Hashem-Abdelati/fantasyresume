@@ -1,10 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
-import { X, BookOpen, Mountain, Film } from "lucide-react";
-
+import { X, BookOpen, Mountain, Film, BriefcaseBusiness } from "lucide-react";
 type InventoryItem = {
   id: string;
   name: string;
-  icon: "book" | "mountain" | "film";
+  icon: "book" | "mountain" | "film" | "briefcase";
   rarity: "legendary" | "epic" | "rare";
   summary: string;
   content: React.ReactNode;
@@ -18,6 +17,7 @@ const STORAGE_KEY = "inventory_slots_v1";
 function IconFor({ icon }: { icon: InventoryItem["icon"] }) {
   if (icon === "book") return <BookOpen size={18} />;
   if (icon === "mountain") return <Mountain size={18} />;
+  if (icon === "briefcase") return <BriefcaseBusiness size={18} />;
   return <Film size={18} />;
 }
 
@@ -127,6 +127,54 @@ export default function Inventory() {
                 </div>
                 <figcaption>Me, my twin, and my little sister circa 2012</figcaption>
                 </figure>
+          </div>
+        ),
+      },
+      {
+        id: "career-goals",
+        name: "Career Goals",
+        icon: "briefcase",
+        rarity: "legendary",
+        summary: "Software engineering • AI • product building",
+        content: (
+          <div className="inv-diary">
+            <p>
+              Professionally, I’m interested in roles where I can combine engineering,
+              data, product thinking, and real-world impact. The main paths I’m exploring
+              are software engineering, data engineering, technical consulting, software
+              consulting, data science, cloud architecture, and solutions architecture.
+            </p>
+
+            <p>
+              I like work that sits at the intersection of building and problem-solving.
+              On one side, I enjoy creating full-stack applications, designing clean systems,
+              and turning ideas into usable products. On the other side, I’m drawn to data,
+              machine learning, and AI because they allow technology to become more adaptive,
+              personalized, and intelligent.
+            </p>
+
+            <p>
+              Some of the areas I’m most excited about are bioinformatics, wearable technology,
+              AI agents, health-focused software, and data-driven platforms. I’m especially
+              interested in how AI can be used to make a practical impact, whether that means
+              helping people make better decisions, improving health outcomes, automating
+              complicated workflows, or making complex information easier to understand.
+            </p>
+
+            <p>
+              Long term, I want to become the kind of technical professional who can move
+              between engineering depth and strategic thinking. I want to understand the
+              architecture, the data, the user, and the business problem well enough to build
+              solutions that are not only impressive, but genuinely useful.
+            </p>
+
+            <p>
+              I’m still early in my career, but I know the direction I want to move in:
+              keep building, keep learning, and keep working on technology that has a reason
+              to exist beyond the screen.
+            </p>
+
+            <p> - Hashem Abdelati 02/05/2026 </p>
           </div>
         ),
       },
