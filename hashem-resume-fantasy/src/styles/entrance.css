@@ -1,0 +1,106 @@
+.hall-entrance {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  overflow: hidden;
+  color: #ead8b3;
+  pointer-events: none;
+}
+.entrance-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #080a0f;
+  font:
+    italic 19px "IM Fell English",
+    Georgia,
+    serif;
+}
+.entrance-title {
+  position: absolute;
+  bottom: 10%;
+  left: 15%;
+  right: 15%;
+  text-align: center;
+  text-shadow:
+    0 2px 15px #000,
+    0 1px 4px #000;
+  transition:
+    opacity 0.6s,
+    transform 0.6s;
+}
+.entrance-title p {
+  font:
+    10px Arial,
+    sans-serif;
+  letter-spacing: 0.35em;
+  margin: 0 0 14px;
+}
+.entrance-title h1 {
+  font:
+    400 clamp(25px, 4vw, 42px) Cinzel,
+    Georgia,
+    serif;
+  margin: 0 0 8px;
+}
+.entrance-title > span {
+  font:
+    italic 19px "IM Fell English",
+    Georgia,
+    serif;
+  color: #d3c3a5;
+}
+.is-opening .entrance-title,
+.is-loading .entrance-title {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.entrance-skip {
+  position: absolute;
+  bottom: 28px;
+  right: 4%;
+  border: 1px solid #c9a76855;
+  background: #0b0e13cc;
+  color: #e1d3b8;
+  padding: 12px 18px;
+  border-radius: 30px;
+  font:
+    12px Arial,
+    sans-serif;
+  pointer-events: auto;
+}
+.entrance-skip span {
+  margin-left: 15px;
+}
+/* One viewport from the first door frame through the final resting camera. */
+.codex-world.in-hall .artifact-canvas {
+  position: fixed;
+  inset: 0;
+  height: auto;
+}
+.codex-world .codex-header,
+.codex-world main,
+.codex-world .scene-controls {
+  transition: opacity 1.2s ease;
+}
+.codex-world.is-entering .codex-header,
+.codex-world.is-entering main,
+.codex-world.is-entering .scene-controls {
+  opacity: 0;
+  visibility: hidden;
+}
+@media (prefers-reduced-motion: reduce) {
+  .codex-world .codex-header,
+  .codex-world main,
+  .codex-world .scene-controls {
+    transition: none;
+  }
+}
+@media (max-width: 760px) {
+  .entrance-title {
+    bottom: 13%;
+    left: 5%;
+    right: 5%;
+  }
+}

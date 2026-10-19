@@ -1,3 +1,5 @@
+import { signalRaven } from "../components/three/ravenSignals";
+import { contact } from "../data/navigation";
 import { useMemo, useState } from "react";
 import ArcaneCard from "../components/ArcaneCard";
 import { Mail, Github, Linkedin, Feather, Sparkles } from "lucide-react";
@@ -10,7 +12,7 @@ export default function Contact() {
   });
   const [sent, setSent] = useState(false);
 
-  const ravenAddress = "abdelatihashem@gmail.com";
+  const ravenAddress = contact.email;
 
   const mailtoHref = useMemo(() => {
     const subject = `Raven from ${form.name || "A Fellow Traveler"}`;
@@ -31,6 +33,7 @@ export default function Contact() {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) return;
+    signalRaven("prepare");
     window.location.href = mailtoHref; // opens user email app
     setSent(true);
   };
@@ -39,55 +42,84 @@ export default function Contact() {
     <section className="character-screen">
       <div className="character-rings" />
 
-      <div className="relative z-10 grid grid-cols-1 gap-6 xl:grid-cols-[1.35fr_1fr]">
+      <div className="relative z-10 grid grid-cols-1 gap-6 contact-columns">
         {/* Left: Send a Raven */}
         <ArcaneCard
           title="Send a Raven"
           subtitle="Dispatch a message to the Codex Keeper"
         >
           {!sent ? (
-            <form className="space-y-4" onSubmit={onSubmit}>
+            <form
+              className="space-y-4"
+              onSubmit={onSubmit}
+              onFocus={() => signalRaven("attend")}
+            >
               <div className="rounded-2xl border border-[rgba(255,215,140,0.18)] bg-[rgba(0,0,0,0.22)] p-4">
                 <p className="font-cinzel text-sm tracking-[0.12em] text-[rgba(255,240,196,0.85)]">
                   RAVEN PROTOCOL
                 </p>
                 <p className="mt-1 font-imfell text-[rgba(255,255,255,0.72)]">
-                  Fill the scroll, seal it, and your mail client will carry the message.
+                  Fill the scroll, seal it, and your mail client will carry the
+                  message.
                 </p>
               </div>
 
               <div>
-                <label className="block font-cinzel text-xs tracking-[0.1em] text-[rgba(255,240,196,0.75)]">
+                <label
+                  htmlFor="contact-name"
+                  className="block font-cinzel text-xs tracking-[0.1em] text-[rgba(255,240,196,0.75)]"
+                >
                   Your Name
                 </label>
                 <input
+                  id="contact-name"
+                  name="name"
+                  required
                   value={form.name}
-                  onChange={(e) => setForm((p) => ({ ...p, name: e.target.value }))}
-                  placeholder="e.g. Elara Nightwind"
+                  onChange={(e) =>
+                    setForm((p) => ({ ...p, name: e.target.value }))
+                  }
+                  placeholder="Your name"
                   className="mt-1.5 w-full rounded-xl border border-[rgba(255,215,140,0.18)] bg-black/30 px-3 py-2.5 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[rgba(255,215,140,0.45)] focus:ring-2 focus:ring-[rgba(255,215,140,0.18)]"
                 />
               </div>
 
               <div>
-                <label className="block font-cinzel text-xs tracking-[0.1em] text-[rgba(255,240,196,0.75)]">
+                <label
+                  htmlFor="contact-email"
+                  className="block font-cinzel text-xs tracking-[0.1em] text-[rgba(255,240,196,0.75)]"
+                >
                   Your Email
                 </label>
                 <input
                   type="email"
+                  id="contact-email"
+                  name="email"
+                  required
                   value={form.email}
-                  onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
-                  placeholder="you@realm.com"
+                  onChange={(e) =>
+                    setForm((p) => ({ ...p, email: e.target.value }))
+                  }
+                  placeholder="you@example.com"
                   className="mt-1.5 w-full rounded-xl border border-[rgba(255,215,140,0.18)] bg-black/30 px-3 py-2.5 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[rgba(255,215,140,0.45)] focus:ring-2 focus:ring-[rgba(255,215,140,0.18)]"
                 />
               </div>
 
               <div>
-                <label className="block font-cinzel text-xs tracking-[0.1em] text-[rgba(255,240,196,0.75)]">
+                <label
+                  htmlFor="contact-message"
+                  className="block font-cinzel text-xs tracking-[0.1em] text-[rgba(255,240,196,0.75)]"
+                >
                   Message Scroll
                 </label>
                 <textarea
+                  id="contact-message"
+                  name="message"
+                  required
                   value={form.message}
-                  onChange={(e) => setForm((p) => ({ ...p, message: e.target.value }))}
+                  onChange={(e) =>
+                    setForm((p) => ({ ...p, message: e.target.value }))
+                  }
                   placeholder="Write your message to Hashem..."
                   className="mt-1.5 h-36 w-full resize-y rounded-xl border border-[rgba(255,215,140,0.18)] bg-black/30 px-3 py-2.5 text-sm text-white placeholder:text-white/35 outline-none transition focus:border-[rgba(255,215,140,0.45)] focus:ring-2 focus:ring-[rgba(255,215,140,0.18)]"
                 />
@@ -105,18 +137,27 @@ export default function Contact() {
               </button>
 
               <p className="text-xs text-white/55">
-                This opens your default email app and sends to{" "}
-                <span className="text-[rgba(255,240,196,0.9)]">{ravenAddress}</span>.
+                This opens a draft in your email app addressed to{" "}
+                <span className="text-[rgba(255,240,196,0.9)]">
+                  {ravenAddress}
+                </span>
+                .
               </p>
             </form>
           ) : (
-            <div className="rounded-2xl border border-[rgba(255,215,140,0.24)] bg-[rgba(0,0,0,0.22)] p-5">
+            <div
+              role="status"
+              className="rounded-2xl border border-[rgba(255,215,140,0.24)] bg-[rgba(0,0,0,0.22)] p-5"
+            >
               <div className="flex items-center gap-2 text-[rgba(255,240,196,0.95)]">
                 <Sparkles className="h-4 w-4" />
-                <p className="font-cinzel tracking-[0.08em]">RAVEN DISPATCHED</p>
+                <p className="font-cinzel tracking-[0.08em]">
+                  MESSAGE PREPARED
+                </p>
               </div>
               <p className="mt-2 font-imfell text-lg text-white/80">
-                Your message scroll has been prepared. If your mail app did not open, use the direct sigil below.
+                Your message scroll has been prepared. If your mail app did not
+                open, use the direct sigil below.
               </p>
               <a
                 href={mailtoHref}
@@ -130,10 +171,13 @@ export default function Contact() {
         </ArcaneCard>
 
         {/* Right: Other channels */}
-        <ArcaneCard title="Other Channels" subtitle="Guild links & direct contact">
+        <ArcaneCard
+          title="Other Channels"
+          subtitle="Guild links & direct contact"
+        >
           <div className="space-y-3">
             <a
-              href="mailto:abdelatihashem@gmail.com"
+              href={`mailto:${contact.email}`}
               className="group flex items-center justify-between rounded-xl border border-[rgba(255,215,140,0.18)] bg-black/20 px-3 py-3 transition hover:bg-black/30"
             >
               <span className="inline-flex items-center gap-2 text-white/90">
@@ -146,7 +190,7 @@ export default function Contact() {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/hashem-abdelati/"
+              href={contact.linkedin}
               target="_blank"
               rel="noreferrer"
               className="group flex items-center justify-between rounded-xl border border-[rgba(255,215,140,0.18)] bg-black/20 px-3 py-3 transition hover:bg-black/30"
@@ -161,7 +205,7 @@ export default function Contact() {
             </a>
 
             <a
-              href="https://github.com/Hashem-Abdelati"
+              href={contact.github}
               target="_blank"
               rel="noreferrer"
               className="group flex items-center justify-between rounded-xl border border-[rgba(255,215,140,0.18)] bg-black/20 px-3 py-3 transition hover:bg-black/30"
@@ -181,7 +225,8 @@ export default function Contact() {
               RESPONSE NOTE
             </p>
             <p className="mt-1 text-sm text-white/70">
-              Best for opportunities, collaborations, internships, and project discussions.
+              Best for opportunities, collaborations, internships, and project
+              discussions.
             </p>
           </div>
         </ArcaneCard>

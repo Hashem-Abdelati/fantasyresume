@@ -1,0 +1,312 @@
+export type QuestStatus = "completed" | "in_progress";
+
+type QuestCompanion = {
+  name: string;
+  role?: string;
+  link?: string;
+};
+
+export type Quest = {
+  id: string;
+  title: string;
+  subtitle: string;
+  status: QuestStatus;
+  difficulty: "Novice" | "Adept" | "Master";
+  timeline: string;
+  objective: string;
+  approach: string[];
+  loot: string[];
+  stack: string[];
+  companions?: QuestCompanion[];
+  links?: {
+    demo?: string;
+    repo?: string;
+    paper?: string;
+  };
+};
+
+export const quests: Quest[] = [
+  {
+    id: "spacenet-segmentation",
+    title: "Quest: Deep Learning for Building Footprint Segmentation",
+    subtitle: "Satellite imagery segmentation with PyTorch",
+    status: "completed",
+    difficulty: "Master",
+    timeline: "2025",
+    objective:
+      "Extract pixel-level building footprints from high-resolution satellite imagery and benchmark segmentation performance on SpaceNet-2 (Las Vegas AOI).",
+    approach: [
+      "Implemented a ResNet-50 fully convolutional segmentation model in PyTorch for binary building-mask prediction.",
+      "Designed end-to-end train/validation/evaluation pipelines using BCE loss with Adam optimization.",
+      "Standardized experiment tracking for consistent metric comparison across runs.",
+      "Validated model quality with IoU/F1-centered evaluation suitable for geospatial CV tasks.",
+    ],
+    loot: [
+      "Achieved F1 = 0.8246 and IoU = 0.7016 on benchmarked evaluation.",
+      "Produced a reproducible CV workflow for future architecture comparisons.",
+      "Improved reliability of automated building-footprint extraction from satellite data.",
+    ],
+    stack: [
+      "Python",
+      "PyTorch",
+      "ResNet-50",
+      "Segmentation",
+      "SpaceNet-2",
+      "Computer Vision",
+    ],
+    companions: [
+      {
+        name: "Yousra El Zamzami",
+        role: "- SegFormer architecture, data preperation and code review",
+        link: "https://www.linkedin.com/in/yousraelzamzami/",
+      },
+    ],
+    links: {
+      repo: "https://github.com/Hashem-Abdelati/SkyMapper",
+      paper: "/csci_4364_6364_F2025_SkyMapper.pdf",
+    },
+  },
+  {
+    id: "glycosos",
+    title: "Quest: GlycosOS",
+    subtitle:
+      "AI-powered diabetes intelligence app using wearables + nutrition data",
+    status: "in_progress",
+    difficulty: "Master",
+    timeline: "2026 – Present",
+    objective:
+      "Build a premium health-tech app that combines wearable signals, glucose data, nutrition logs, and machine learning to help people with diabetes understand their body, anticipate risk, and make better daily decisions.",
+    approach: [
+      "Designed the product vision around a diabetes-focused intelligence layer that feels closer to WHOOP-style health coaching than a basic glucose tracker.",
+      "Planned an Expo React Native mobile app with onboarding, authentication, user profiles, medical context, wearable connection flows, and persistent health data storage.",
+      "Structured the app around key health inputs including glucose readings, meals, carbs, activity, sleep, stress, heart rate, and wearable-derived recovery signals.",
+      "Outlined machine learning features such as glucose trend analysis, hypo/hyperglycemia risk prediction, meal impact forecasting, and personalized insight generation.",
+      "Designed the system to eventually support AI agents that can summarize patterns, explain glucose changes, and turn complex health data into clear recommendations.",
+      "Prioritized real-world usefulness, clinical caution, and personalization so the app provides supportive insights without pretending to replace medical advice.",
+    ],
+    loot: [
+      "Created the foundation for a technically impressive, health-focused AI product with real user value.",
+      "Connected software engineering, data science, wearables, and healthcare into one cohesive product direction.",
+      "Established a strong project roadmap covering mobile development, backend persistence, ML modeling, and AI-powered insight generation.",
+      "Positioned the app as a premium diabetes companion for users who want deeper, more personalized metabolic intelligence.",
+    ],
+    stack: [
+      "Expo",
+      "React Native",
+      "TypeScript",
+      "Firebase",
+      "Authentication",
+      "Health Data",
+      "Wearables",
+      "Machine Learning",
+      "AI Agents",
+      "Data Science",
+      "Bioinformatics",
+      "Product Design",
+    ],
+    links: {
+      repo: "https://github.com/Hashem-Abdelati/GlycosOs",
+    },
+  },
+  {
+    id: "xv6-shared-memory",
+    title: "Quest: Container Infrastructure for xv6 UNIX",
+    subtitle: "Shared memory + virtual memory management",
+    status: "completed",
+    difficulty: "Master",
+    timeline: "2024",
+    objective:
+      "Implement kernel-level shared-memory and virtual-memory mechanisms in xv6 to support safe IPC, efficient deallocation, and stronger process isolation.",
+    approach: [
+      "Developed a shared memory management system inside xv6 with kernel-level bookkeeping.",
+      "Designed reference-counted shared-memory structures to guarantee correct cleanup on process exit/termination.",
+      "Applied synchronization controls (mutexes and condition-variable style coordination) to protect concurrent shared-memory access.",
+      "Contributed to containerized isolation behavior by constraining shared resources within namespace boundaries.",
+    ],
+    loot: [
+      "Enabled reliable shared-memory IPC in a teaching OS environment.",
+      "Reduced memory-leak and stale-mapping risks through deterministic refcount-based teardown.",
+      "Strengthened process isolation guarantees for container-like execution contexts.",
+    ],
+    stack: [
+      "C",
+      "xv6",
+      "OS Kernel",
+      "Virtual Memory",
+      "Synchronization",
+      "Namespaces",
+    ],
+  },
+  {
+    id: "arg-university-system",
+    title: "Quest: University ARG System",
+    subtitle: "Course registration, grading, and transcript workflows",
+    status: "completed",
+    difficulty: "Master",
+    timeline: "2023",
+    objective:
+      "Build a full-stack Application, Registration, and Graduation (ARG) platform for students, instructors, and administrators with scalable and validated workflows.",
+    approach: [
+      "Implemented online course registration, grade submission, and transcript lookup/search across role-based interfaces.",
+      "Designed a robust validation layer to protect data integrity across student/faculty/secretary actions.",
+      "Built a scalable architecture on MySQL (AWS) with frontend flows optimized for usability and reliability.",
+      "Engineered the system to support high concurrency and consistent behavior under heavy usage.",
+    ],
+    loot: [
+      "Supported 2,000+ students and faculty in a unified academic workflow platform.",
+      "Handled 500+ simultaneous users with stable performance.",
+      "Delivered cleaner user experience for enrollment and transcript operations.",
+    ],
+    stack: ["Python", "HTML", "CSS", "JavaScript", "MySQL", "AWS"],
+  },
+  {
+    id: "abdelati-comics",
+    title: "Quest: AbdelatiComics E-Commerce Platform",
+    subtitle: "Comic marketplace with full-stack data flow",
+    status: "completed",
+    difficulty: "Adept",
+    timeline: "2023",
+    objective:
+      "Create an e-commerce platform for comic enthusiasts with seamless front-end shopping flows and reliable back-end data operations.",
+    approach: [
+      "Engineered product browsing and transaction-oriented UI flows tailored to comic buyers.",
+      "Integrated frontend interactions with backend/database operations for consistent catalog and user actions.",
+      "Structured core commerce logic to keep inventory/customer actions synchronized.",
+      "Focused on smooth UX and clean data movement across the app layers.",
+    ],
+    loot: [
+      "Delivered a niche e-commerce experience targeted to comic-book users.",
+      "Established dependable front-back integration patterns for marketplace features.",
+      "Built a base architecture expandable to payments, accounts, and order-history features.",
+    ],
+    stack: [
+      "JavaScript",
+      "HTML",
+      "CSS",
+      "Full-Stack Development",
+      "Database Operations",
+    ],
+  },
+  {
+    id: "middle-man-sports-matching",
+    title: "Quest: Middle Man",
+    subtitle: "Full-stack sports partner matching + pickup game coordination",
+    status: "in_progress",
+    difficulty: "Master",
+    timeline: "2025 – Present",
+    objective:
+      "Build a full-stack platform that helps users find compatible sports partners and organize pickup games using ranked recommendations based on distance, skill similarity, and schedule overlap.",
+    approach: [
+      "Designed a multi-service architecture: React + Tailwind frontend, Node/Express + Prisma + PostgreSQL/AWS backend, and a Python FastAPI matchmaking service.",
+      "Implemented recommendation flow where the backend builds sport-filtered candidate pairs, sends features to the ML service, and returns ranked results to the UI.",
+      "Engineered pairwise features using Haversine-based distance similarity, skill-gap similarity, and availability overlap from a 336-slot weekly time-bitset with Jaccard scoring.",
+      "Built a resilient ranking pipeline with V2 logistic-regression model scoring (`p_success`) and automatic fallback to deterministic V1 weighted scoring when model artifacts are unavailable.",
+      "Delivered core product modules including auth, onboarding, profile editing, sports/facilities, feed, and open-game create/join/cancel workflows.",
+    ],
+    loot: [
+      "Enabled end-to-end, sport-specific partner recommendations with explainable ranking signals.",
+      "Established a scalable service boundary between app API and ML scoring engine for future model upgrades.",
+      "Created strong production-style foundations for real-time matchmaking, game orchestration, and growth-ready feature expansion.",
+    ],
+    stack: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Node.js",
+      "Express",
+      "Prisma",
+      "PostgreSQL",
+      "Python",
+      "FastAPI",
+      "scikit-learn",
+      "Machine Learning",
+    ],
+    companions: [
+      {
+        name: "Ilinca Hirtopanu",
+        role: "- Co-contributor on frontend and backend development, data flow design, and code review",
+        link: "https://www.linkedin.com/in/ilinca-hirtopanu/",
+      },
+      {
+        name: "Niquita Varier",
+        role: "- Co-contributor on backend development and AWS database management",
+        link: "https://www.linkedin.com/in/niquita-varier/",
+      },
+      {
+        name: "Kurdo Shali",
+        role: "- Co-contributor on machine learning-based recommendation features",
+        link: "https://www.linkedin.com/in/kurdo-shali/",
+      },
+    ],
+    links: {
+      repo: "https://github.com/Hashem-Abdelati/senior-design-ihnk",
+    },
+  },
+  {
+    id: "exercise-screen-time",
+    title: "Quest: Exercise for Screen Time",
+    subtitle: "Earn social media time through pushups (iOS MVP)",
+    status: "in_progress",
+    difficulty: "Master",
+    timeline: "2025 – Present",
+    objective:
+      "Reduce doom-scrolling by requiring exercise to unlock social-media usage through a pushup-to-time-bank system.",
+    approach: [
+      "Built an iOS MVP where 1 pushup earns 1 minute of app usage time.",
+      "Used front-camera pose estimation (Apple Vision) to count pushups and update a local time bank.",
+      "Implemented a Shortcuts-based enforcement workaround that redirects users from TikTok/Instagram when minutes are depleted.",
+      "Designed minute-spend logic and ongoing improvements for detection thresholds, UI polish, and expanded exercise modes.",
+    ],
+    loot: [
+      "Validated the core behavior loop: effort-gated screen time with real friction.",
+      "Created a working non-paid workaround despite iOS third-party app-blocking constraints.",
+      "Laid foundation for stronger enforcement flows and additional exercise mechanics.",
+    ],
+    stack: [
+      "Swift",
+      "iOS",
+      "Apple Vision",
+      "Shortcuts Automation",
+      "MVP Prototyping",
+    ],
+    links: {
+      repo: "https://github.com/Hashem-Abdelati/exerciseforscreentime",
+    },
+  },
+  {
+    id: "ai-npc-town-sim",
+    title: "Quest: AI NPC Town Sim",
+    subtitle: "In-character NPC dialogue with memory + retrieval (local LLM)",
+    status: "in_progress",
+    difficulty: "Master",
+    timeline: "2025 – Present",
+    objective:
+      "Build a data-driven NPC simulation where players explore towns and converse with NPCs that stay in-character using persistent memory and retrieval-augmented local LLM prompting.",
+    approach: [
+      "Architected a modular Python system with separate layers for game state, NPC logic, memory storage, retrieval, and LLM orchestration.",
+      "Implemented multi-source memory grounding: short-term dialogue history, NPC profile memory (backstory/relationships), world knowledge, and public rumor/flag memory.",
+      "Built embedding-based top-k retrieval to select relevant context snippets each turn and inject them into prompt construction for more coherent, grounded responses.",
+      "Integrated Ollama for local model serving and configurable generation controls (model, temperature, max tokens) to support offline, hackable experimentation.",
+      "Developed two interfaces: a simple CLI REPL (`main.py`) and a keyboard-driven curses TUI (`maintui.py`) for richer interaction loops.",
+      "Designed world content as JSON-first data (`data/`) so towns, lore, NPCs, and memory files can be expanded rapidly without heavy code changes.",
+    ],
+    loot: [
+      "Delivered an in-progress but functional prototype where NPCs maintain persona consistency across conversations.",
+      "Improved dialogue grounding quality by combining retrieval across four memory channels instead of relying on raw chat history alone.",
+      "Created an extensible foundation for future features such as quests, town-state mutation, inventories, and long-term world simulation.",
+    ],
+    stack: [
+      "Python",
+      "Ollama",
+      "Local LLMs",
+      "Sentence-Transformers",
+      "Embeddings",
+      "RAG",
+      "Curses TUI",
+      "JSON Data Modeling",
+    ],
+    links: {
+      repo: "https://github.com/Hashem-Abdelati/ainpc",
+    },
+  },
+];

@@ -1,0 +1,35 @@
+{
+  "author": "Original geometry for Hashem Abdelati",
+  "thirdPartyModels": false,
+  "blockout": false,
+  "assets": [
+    {
+      "file": "spellbook.glb",
+      "triangles": 71876,
+      "bytes": 3500720,
+      "meshes": 23,
+      "optimizedBytes": 514808
+    },
+    {
+      "file": "satchel.glb",
+      "triangles": 38796,
+      "bytes": 2751116,
+      "meshes": 29,
+      "optimizedBytes": 377156
+    },
+    {
+      "file": "raven.glb",
+      "triangles": 93256,
+      "bytes": 5609628,
+      "meshes": 25,
+      "optimizedBytes": 1081192
+    },
+    {
+      "file": "doors.glb",
+      "triangles": 54340,
+      "bytes": 6399780,
+      "meshes": 10,
+      "optimizedBytes": 1213036
+    }
+  ]
+}
