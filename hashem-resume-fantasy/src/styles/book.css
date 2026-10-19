@@ -1,0 +1,1443 @@
+/* The codex is the reading surface: leather boards, two sewn leaves, dark ink. */
+.artifact-book .chapter-content {
+  padding: 16px 28px 12px;
+  min-height: calc(100svh - 84px);
+  pointer-events: auto;
+}
+.artifact-book .artifact-canvas {
+  pointer-events: none;
+}
+.artifact-book .chapter-artifact-poster {
+  display: none;
+}
+.artifact-book .scene-controls {
+  display: none;
+}
+.book-reader {
+  --ink: #392d20;
+  --muted-ink: #6a5339;
+  --rule: #8b6a3d55;
+  position: relative;
+  max-width: 1600px;
+  margin: 0 auto;
+  color: var(--ink);
+  transform-origin: 50% 50%;
+}
+.book-topline,
+.book-bottomline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #c4b18a;
+  font:
+    10px/1.4 Cinzel,
+    Georgia,
+    serif;
+  letter-spacing: 0.17em;
+}
+.book-topline {
+  height: 29px;
+  margin-bottom: 5px;
+}
+.book-topline a,
+.book-bottomline a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 0;
+  text-decoration: none;
+  letter-spacing: 0.06em;
+}
+.book-topline a:hover,
+.book-bottomline a:hover {
+  color: #fff1c9;
+}
+.book-topline > span:nth-child(2) {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.book-bookmarks {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  padding-right: 28px;
+  position: relative;
+  z-index: 3;
+  height: 41px;
+}
+.book-bookmarks a {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border: 1px solid #9b773c70;
+  border-bottom: 0;
+  padding: 9px 22px 12px;
+  border-radius: 6px 6px 0 0;
+  background: linear-gradient(100deg, #30201a, #211712);
+  color: #c7b797;
+  font:
+    12px Cinzel,
+    Georgia,
+    serif;
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    background 0.2s;
+  box-shadow: inset 0 2px 0 #d2a34814;
+}
+.book-bookmarks a span {
+  font-size: 10px;
+  opacity: 0.65;
+}
+.book-bookmarks a.active {
+  background: linear-gradient(110deg, #82602e, #513615);
+  color: #fff0c1;
+  border-color: #d6ad60;
+  box-shadow: inset 0 2px 0 #e6c38470;
+}
+.book-bookmarks a:hover {
+  color: #fff0c1;
+  background-color: #66441f;
+}
+.book-binding {
+  position: relative;
+  padding: 14px 15px 19px;
+  background:
+    radial-gradient(ellipse at 20% 20%, #71503955, transparent 50%),
+    repeating-linear-gradient(27deg, #ffffff03 0 1px, transparent 1px 4px),
+    linear-gradient(
+      110deg,
+      #291b14,
+      #493024 35%,
+      #221610 51%,
+      #513325 70%,
+      #2c1c13
+    );
+  border: 1px solid #987545;
+  border-radius: 10px 11px 16px 15px;
+  box-shadow:
+    0 28px 70px #000b,
+    0 7px 0 #1c120c,
+    0 8px 0 #97653a66,
+    inset 0 0 0 4px #17100c,
+    inset 0 0 0 5px #a77c384d,
+    inset 0 0 0 9px #2b1b16;
+}
+.book-spread {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  position: relative;
+  height: calc(100svh - 267px);
+  min-height: 280px;
+  border-radius: 4px 7px 9px 4px;
+  box-shadow:
+    0 2px 0 #886744,
+    0 4px 0 #d2b786,
+    0 5px 0 #886744,
+    0 7px 0 #cbb080,
+    0 8px 0 #886744,
+    0 10px 0 #ab8a5b;
+}
+.folio-page {
+  min-width: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  padding: 22px clamp(24px, 3.2vw, 58px) 12px;
+  color: var(--ink);
+  background-color: #e4d0a5;
+  background-image:
+    radial-gradient(ellipse at 25% 15%, #fff9e052, transparent 60%),
+    radial-gradient(ellipse at 100% 100%, #95633535, transparent 65%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='grain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%236a4927' opacity='.13' filter='url(%23grain)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+  font:
+    16px/1.65 Georgia,
+    "Times New Roman",
+    serif;
+}
+.folio-left {
+  border-radius: 5px 1px 0 5px;
+  box-shadow:
+    inset 3px 0 12px #79572b35,
+    inset -22px 0 35px -22px #684626b0;
+}
+.folio-right {
+  border-radius: 1px 5px 5px 0;
+  box-shadow:
+    inset -3px 0 12px #79572b35,
+    inset 26px 0 35px -21px #684626bb;
+  background-color: #e9d8b1;
+}
+.folio-page::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 13px 15px 9px;
+  border: 1px solid #8b6a3d30;
+  border-radius: inherit;
+}
+.folio-running-head {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  color: var(--muted-ink);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 9px;
+  margin-bottom: 22px;
+  font:
+    9px/1.3 Cinzel,
+    Georgia,
+    serif;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+.folio-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #94703e70 transparent;
+  flex: 1;
+  min-height: 0;
+  padding: 0 7px 20px 0;
+  outline-offset: -2px;
+}
+.folio-page-number {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font:
+    11px Cinzel,
+    Georgia,
+    serif;
+  padding-top: 11px;
+  color: #755a36;
+}
+.folio-page-number span {
+  font-size: 10px;
+  opacity: 0.6;
+}
+.book-gutter {
+  pointer-events: none;
+  position: absolute;
+  top: 14px;
+  bottom: 19px;
+  left: 50%;
+  width: 48px;
+  transform: translateX(-50%);
+  z-index: 2;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #5a371416 20%,
+    #5a371455 46%,
+    #37261499 49%,
+    #e5d1a4 51%,
+    #613e1b33 55%,
+    transparent 100%
+  );
+}
+.book-gutter::before {
+  content: "";
+  position: absolute;
+  left: 49%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #67401d75;
+}
+.book-corner {
+  position: absolute;
+  z-index: 4;
+  width: 28px;
+  height: 28px;
+  border: 3px double #b49352;
+  pointer-events: none;
+}
+.corner-tl {
+  left: 4px;
+  top: 4px;
+  border-right: 0;
+  border-bottom: 0;
+  border-radius: 5px 0;
+}
+.corner-tr {
+  right: 4px;
+  top: 4px;
+  border-left: 0;
+  border-bottom: 0;
+  border-radius: 0 5px;
+}
+.corner-bl {
+  left: 4px;
+  bottom: 4px;
+  border-right: 0;
+  border-top: 0;
+  border-radius: 0 5px;
+}
+.corner-br {
+  right: 4px;
+  bottom: 4px;
+  border-left: 0;
+  border-top: 0;
+  border-radius: 5px 0;
+}
+.book-bottomline {
+  height: 45px;
+  padding: 5px 6px 0;
+}
+.book-bottomline i {
+  padding: 0 12px;
+  opacity: 0.4;
+  font-style: normal;
+}
+.book-bottomline a {
+  min-width: 130px;
+}
+.book-bottomline a:last-child {
+  justify-content: flex-end;
+}
+.folio-kicker {
+  font:
+    9px/1.5 Cinzel,
+    Georgia,
+    serif;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: #775a32;
+  margin: 0 0 12px;
+}
+.folio-title {
+  color: #382718;
+  font:
+    500 clamp(26px, 2.6vw, 42px)/1.15 Cinzel,
+    Georgia,
+    serif;
+  letter-spacing: -0.04em;
+  margin: 0 0 20px;
+  text-wrap: balance;
+  outline: none;
+}
+.folio-title em {
+  font:
+    italic 1em/1.2 "IM Fell English",
+    Georgia,
+    serif;
+  letter-spacing: -0.02em;
+  color: #786037;
+}
+.folio-intro {
+  margin: -3px 0 24px;
+  color: #655139;
+  font:
+    italic 18px/1.5 "IM Fell English",
+    Georgia,
+    serif;
+}
+.folio-portrait-row {
+  display: flex;
+  gap: clamp(18px, 2.3vw, 36px);
+  align-items: center;
+  margin: 23px 0 25px;
+}
+.folio-portrait {
+  width: 42%;
+  max-width: 190px;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 5px;
+  border: 1px solid #a3814c;
+  outline: 1px solid #917045;
+  outline-offset: 3px;
+  background: #c7ac7970;
+  transform: rotate(-2deg);
+}
+.folio-portrait img {
+  width: 100%;
+  height: clamp(155px, 15vw, 225px);
+  object-fit: cover;
+  object-position: center 25%;
+  filter: sepia(0.36) saturate(0.65) contrast(0.98);
+  display: block;
+}
+.folio-portrait figcaption {
+  font:
+    8px/1.5 Cinzel,
+    Georgia,
+    serif;
+  letter-spacing: 0.2em;
+  text-align: center;
+  padding: 7px 0 2px;
+}
+.folio-identity h2 {
+  font:
+    500 clamp(20px, 2.1vw, 30px)/1.15 Cinzel,
+    Georgia,
+    serif;
+  margin: 12px 0 8px;
+  color: #3f2d1b;
+}
+.folio-identity p {
+  font:
+    italic 16px/1.45 Georgia,
+    serif;
+  margin: 0 0 14px;
+  color: #715739;
+}
+.folio-identity small {
+  font:
+    9px Cinzel,
+    Georgia,
+    serif;
+  letter-spacing: 0.1em;
+}
+.folio-seal {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 3px double #957343;
+  border-radius: 50%;
+  color: #75552f;
+  font:
+    25px Georgia,
+    serif;
+}
+.folio-dropcap {
+  margin: 0 0 20px;
+}
+.folio-dropcap::first-letter {
+  float: left;
+  font:
+    52px/0.85 "IM Fell English",
+    Georgia,
+    serif;
+  padding: 7px 7px 0 0;
+  color: #845927;
+}
+.folio-facts {
+  margin: 24px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 10px 0;
+  font:
+    13px/1.55 Georgia,
+    serif;
+}
+.folio-facts > div {
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 12px;
+  padding: 5px 0;
+}
+.folio-facts dt {
+  font:
+    9px/2 Cinzel,
+    Georgia,
+    serif;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #755834;
+}
+.folio-facts dd {
+  margin: 0;
+}
+.folio-text-link {
+  color: #6c431f;
+  font:
+    italic 14px/1.5 Georgia,
+    serif;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.folio-traits {
+  margin: 24px 0 27px;
+}
+.folio-traits section {
+  display: grid;
+  grid-template-columns: 23px 1fr;
+  gap: 12px;
+  margin: 0 0 20px;
+}
+.folio-traits section > span {
+  font-size: 26px;
+  color: #8e672e;
+  line-height: 1.1;
+}
+.folio-traits h3 {
+  font:
+    600 13px/1.4 Cinzel,
+    Georgia,
+    serif;
+  margin: 0 0 6px;
+}
+.folio-traits p {
+  font:
+    14px/1.6 Georgia,
+    serif;
+  color: #614d37;
+  margin: 0;
+}
+.folio-section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+  margin: 16px 0 9px;
+}
+.folio-section-heading h2,
+.folio-section-heading h3 {
+  font:
+    600 16px/1.5 Cinzel,
+    Georgia,
+    serif;
+  margin: 0;
+}
+.folio-section-heading > span {
+  font:
+    8px Cinzel,
+    Georgia,
+    serif;
+  letter-spacing: 0.12em;
+  color: #735732;
+}
+.folio-small {
+  font:
+    12px/1.6 Georgia,
+    serif;
+  color: #6b5338;
+  margin: 9px 0 16px;
+}
+.folio-skill-tree {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+.folio-skill-tree h4 {
+  font:
+    600 10px Cinzel,
+    Georgia,
+    serif;
+  color: #74532b;
+  margin: 0 0 14px;
+}
+.folio-skill-tree ul {
+  margin: 0;
+  padding: 0 0 0 10px;
+  border-left: 1px solid #9b7e4b66;
+  list-style: none;
+}
+.folio-skill-tree li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 0 12px 2px;
+  font:
+    12px/1.5 Georgia,
+    serif;
+}
+.folio-skill-tree li::before {
+  content: "";
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #947444;
+  left: -13px;
+  top: 7px;
+  transform: rotate(45deg);
+}
+.folio-skill-tree small {
+  color: #7c623f;
+  font-size: 9px;
+  font-style: italic;
+}
+.folio-quote {
+  border-top: 1px solid var(--rule);
+  padding: 22px 0 0;
+  margin: 20px 0 0;
+  text-align: center;
+  font:
+    italic 19px "IM Fell English",
+    Georgia,
+    serif;
+  color: #836239;
+}
+.folio-index-section {
+  margin: 24px 0;
+}
+.folio-index button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 19px 1fr 12px;
+  gap: 12px;
+  padding: 16px 9px 16px 2px;
+  border: 0;
+  border-bottom: 1px solid #9d7d4f38;
+  border-radius: 0;
+  text-align: left;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.folio-index button:hover,
+.folio-index button[aria-pressed="true"] {
+  background: linear-gradient(90deg, #a77c3226, transparent);
+}
+.index-star {
+  font:
+    22px Georgia,
+    serif;
+  color: #8d642d;
+}
+.folio-index strong {
+  font:
+    600 13px/1.5 Cinzel,
+    Georgia,
+    serif;
+  display: block;
+}
+.folio-index small {
+  font:
+    12px/1.55 Georgia,
+    serif;
+  color: #745d40;
+  display: block;
+  margin-top: 5px;
+}
+.index-arrow {
+  align-self: center;
+  color: #96713b;
+}
+.folio-index button[aria-pressed="true"] .index-star {
+  color: #55390f;
+  text-shadow: 0 0 10px #bd8b32;
+}
+.folio-dossier > section {
+  margin-top: 26px;
+}
+.folio-dossier h3 {
+  font:
+    600 14px/1.5 Cinzel,
+    Georgia,
+    serif;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 8px;
+  margin: 0 0 14px;
+}
+.folio-dossier p {
+  margin-bottom: 16px;
+}
+.folio-dossier ol,
+.folio-dossier ul {
+  padding-left: 22px;
+  margin: 10px 0;
+}
+.folio-dossier li {
+  margin-bottom: 14px;
+  padding-left: 5px;
+  font-size: 15px;
+  line-height: 1.75;
+}
+.folio-dossier li::marker {
+  color: #8a642b;
+  font-family: Cinzel, Georgia, serif;
+}
+.folio-dossier a {
+  color: #6b401e;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.folio-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+}
+.folio-tags span {
+  font:
+    11px/1.5 Georgia,
+    serif;
+  border-bottom: 1px solid #8b6a3d55;
+  padding: 2px 0;
+  color: #674e2f;
+}
+.folio-portals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font:
+    13px Cinzel,
+    Georgia,
+    serif;
+}
+.folio-journey-mark {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0;
+  font:
+    38px Georgia,
+    serif;
+  color: #926f37;
+}
+.folio-journey-mark span {
+  font:
+    10px Cinzel,
+    Georgia,
+    serif;
+  letter-spacing: 0.2em;
+}
+.folio-timeline button {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 29px 1fr 15px;
+  gap: 18px;
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  background: transparent;
+  border-radius: 0;
+  color: var(--ink);
+  text-align: left;
+  padding: 20px 5px;
+  cursor: pointer;
+}
+.folio-timeline button[aria-pressed="true"],
+.folio-timeline button:hover {
+  background: linear-gradient(90deg, #a77c3226, transparent);
+}
+.timeline-number {
+  padding-top: 5px;
+  color: #a78349;
+  font:
+    20px Cinzel,
+    Georgia,
+    serif;
+}
+.folio-timeline button > span:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.folio-timeline strong {
+  font:
+    600 23px Cinzel,
+    Georgia,
+    serif;
+}
+.folio-timeline small {
+  font:
+    11px/1.5 Georgia,
+    serif;
+  color: #79603d;
+}
+.folio-timeline span span {
+  font-size: 14px;
+}
+.folio-margin-note {
+  margin: 30px 0;
+  font:
+    italic 19px/1.5 "IM Fell English",
+    Georgia,
+    serif;
+  color: #82653c;
+}
+.folio-dates {
+  padding: 12px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  color: #73572f;
+  font:
+    11px Cinzel,
+    Georgia,
+    serif;
+}
+.book-reader :focus-visible {
+  outline: 2px solid #876022;
+  outline-offset: 3px;
+}
+.book-bookmarks :focus-visible,
+.book-topline :focus-visible,
+.book-bottomline :focus-visible {
+  outline-color: #f0ce87;
+}
+/* A page rotates around the spine with its own front and back text. */
+.book-turn-layer {
+  position: absolute;
+  inset: 14px 15px 19px;
+  perspective: 2400px;
+  pointer-events: none;
+  z-index: 5;
+}
+.turning-leaf,
+.resting-leaf {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+}
+.turning-leaf {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.turn-left,
+.rest-left {
+  left: 0;
+  transform-origin: right center;
+}
+.turn-right,
+.rest-right {
+  right: 0;
+  transform-origin: left center;
+}
+.leaf-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow: hidden;
+}
+.leaf-front {
+  transform: rotateY(0deg) translateZ(0.5px);
+}
+.leaf-back {
+  transform: rotateY(180deg) translateZ(0.5px);
+}
+.leaf-face > .folio-page,
+.resting-leaf > .folio-page {
+  width: 100%;
+}
+.turning-leaf .folio-page {
+  box-shadow: inset 0 0 30px #9d713333;
+}
+.leather-cover {
+  background:
+    repeating-linear-gradient(36deg, #ffffff03 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse, #533a26, #20140d);
+  border: 7px double #ad843e;
+  outline: 4px solid #2a1b11;
+  outline-offset: -13px;
+  border-radius: 4px;
+  box-shadow:
+    inset 0 0 0 15px #24160e,
+    inset 0 0 0 17px #9b713957,
+    inset 0 0 70px #000;
+  display: grid;
+  place-items: center;
+}
+.cover-crest {
+  color: #d2ad64;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+  font:
+    12px Cinzel,
+    Georgia,
+    serif;
+  letter-spacing: 0.25em;
+}
+.cover-crest strong {
+  display: grid;
+  place-items: center;
+  border: 5px double #bd9047;
+  width: 160px;
+  height: 190px;
+  border-radius: 50%;
+  font:
+    100px Georgia,
+    serif;
+  text-shadow: 2px 3px #000;
+  box-shadow: 0 0 0 12px #b0823333;
+}
+@media (min-width: 1600px) {
+  .folio-page {
+    font-size: 17px;
+  }
+}
+@media (max-width: 1050px) and (min-width: 761px) {
+  .artifact-book .chapter-content {
+    padding: 12px 15px;
+  }
+  .folio-page {
+    padding-inline: 24px;
+  }
+  .folio-skill-tree {
+    gap: 10px;
+  }
+  .folio-running-head {
+    font-size: 8px;
+    letter-spacing: 0.05em;
+  }
+  .book-edition {
+    display: none;
+  }
+}
+@media (max-width: 760px) {
+  .artifact-book .chapter-content {
+    padding: 10px 10px 14px;
+  }
+  .book-topline {
+    height: 34px;
+    padding: 0 6px;
+    font-size: 8px;
+  }
+  .book-topline > span:nth-child(2) {
+    position: static;
+    transform: none;
+    letter-spacing: 0.08em;
+  }
+  .book-edition {
+    display: none;
+  }
+  .book-bookmarks {
+    padding: 0 6px;
+    height: 44px;
+    gap: 4px;
+    justify-content: stretch;
+  }
+  .book-bookmarks a {
+    flex: 1;
+    justify-content: center;
+    padding: 10px 8px;
+    gap: 7px;
+    font-size: 10px;
+  }
+  .book-binding {
+    padding: 10px 9px 15px;
+    border-radius: 6px;
+  }
+  .book-spread {
+    height: auto;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .folio-page {
+    padding: 21px 23px 15px;
+    min-height: calc(100svh - 220px);
+    height: auto;
+    border-radius: 3px;
+    font-size: 15px;
+  }
+  .folio-right {
+    border-top: 3px double #92754877;
+    scroll-margin-top: 86px;
+  }
+  .folio-scroll {
+    overflow: visible;
+    padding: 0 0 15px;
+  }
+  .folio-running-head {
+    margin-bottom: 24px;
+    font-size: 8px;
+    letter-spacing: 0.05em;
+  }
+  .folio-title {
+    font-size: 31px;
+  }
+  .folio-portrait-row {
+    margin-top: 27px;
+    gap: 24px;
+  }
+  .folio-portrait img {
+    height: 180px;
+  }
+  .folio-identity h2 {
+    font-size: 23px;
+  }
+  .folio-identity p {
+    font-size: 14px;
+  }
+  .folio-skill-tree {
+    gap: 14px;
+  }
+  .folio-skill-tree h4 {
+    font-size: 9px;
+  }
+  .folio-skill-tree li {
+    font-size: 11px;
+  }
+  .folio-facts > div {
+    grid-template-columns: 77px 1fr;
+  }
+  .book-gutter,
+  .book-turn-layer {
+    display: none;
+  }
+  .book-bottomline {
+    padding-inline: 2px;
+    font-size: 9px;
+  }
+  .book-bottomline a {
+    min-width: 100px;
+  }
+  .book-bottomline i {
+    padding: 0 4px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-reader *,
+  .book-reader {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.artifact-canvas {
+  transition: opacity 0.65s ease;
+}
+.artifact-book .artifact-canvas {
+  opacity: 0;
+  transition-delay: 0.85s;
+}
+.folio-page-number {
+  position: relative;
+}
+.folio-overflow-hint {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font:
+    italic 9px Georgia,
+    serif;
+  display: none;
+}
+.folio-page[data-overflow="true"] .folio-overflow-hint {
+  display: inline;
+}
+@media (max-width: 760px) {
+  .folio-overflow-hint {
+    display: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .artifact-canvas {
+    transition: none;
+  }
+}
+
+/* Reading pass: keep display lettering on chapter titles, clear type elsewhere. */
+.book-reader {
+  --ink: #30291f;
+  --muted-ink: #574a36;
+  --reading-size: 17px;
+}
+.folio-page {
+  background-color: #efe2c4;
+  background-image:
+    radial-gradient(ellipse at 100% 100%, #9d74311a, transparent 70%),
+    linear-gradient(110deg, #fff9e924, transparent 65%);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: var(--reading-size);
+  line-height: 1.75;
+}
+.folio-right {
+  background-color: #f3e7cc;
+}
+.folio-running-head {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  color: #66553b;
+}
+.folio-kicker {
+  font:
+    600 11px/1.6 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.12em;
+  color: #675135;
+}
+.folio-title {
+  font-size: clamp(28px, 2.35vw, 37px);
+  margin-bottom: 22px;
+  letter-spacing: -0.035em;
+}
+.folio-title em {
+  color: #6b5334;
+}
+.folio-intro {
+  font:
+    400 var(--reading-size)/1.65 Arial,
+    Helvetica,
+    sans-serif;
+  color: #564b3b;
+  margin-bottom: 25px;
+}
+.folio-portrait-row {
+  margin: 24px 0 30px;
+}
+.folio-identity h2 {
+  font-family: Georgia, serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-size: 29px;
+}
+.folio-identity p {
+  font:
+    400 var(--reading-size)/1.5 Arial,
+    Helvetica,
+    sans-serif;
+  color: #56462f;
+}
+.folio-identity small {
+  font:
+    600 11px Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.06em;
+}
+.folio-portrait figcaption {
+  font:
+    600 10px/1.5 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.1em;
+}
+.folio-dropcap {
+  line-height: 1.8;
+}
+.folio-dropcap::first-letter {
+  float: none;
+  font: inherit;
+  padding: 0;
+  color: inherit;
+}
+.folio-traits {
+  margin-top: 28px;
+}
+.folio-traits section {
+  gap: 14px;
+  margin-bottom: 25px;
+}
+.folio-traits h3 {
+  font:
+    600 var(--reading-size)/1.45 Arial,
+    Helvetica,
+    sans-serif;
+  color: #332b21;
+  margin-bottom: 8px;
+}
+.folio-traits p {
+  font:
+    400 var(--reading-size)/1.65 Arial,
+    Helvetica,
+    sans-serif;
+  color: #514637;
+}
+.folio-section-heading {
+  padding-top: 22px;
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+.folio-section-heading h2,
+.folio-section-heading h3,
+.folio-dossier h3 {
+  font:
+    600 20px/1.4 Georgia,
+    serif;
+  color: #352a1c;
+}
+.folio-section-heading > span {
+  font:
+    600 10px/1.5 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.05em;
+  color: #6c5639;
+}
+.folio-small {
+  font:
+    400 14px/1.65 Arial,
+    Helvetica,
+    sans-serif;
+  color: #615139;
+  margin: 12px 0 22px;
+}
+.folio-skill-tree {
+  gap: 22px;
+}
+.folio-skill-tree h4 {
+  font:
+    600 14px/1.4 Arial,
+    Helvetica,
+    sans-serif;
+  color: #4c3b24;
+  margin-bottom: 19px;
+}
+.folio-skill-tree li {
+  font:
+    400 15px/1.5 Arial,
+    Helvetica,
+    sans-serif;
+  padding-bottom: 17px;
+}
+.folio-skill-tree small {
+  font:
+    400 12px/1.5 Arial,
+    Helvetica,
+    sans-serif;
+  color: #6b583c;
+}
+.folio-facts {
+  font:
+    400 15px/1.65 Arial,
+    Helvetica,
+    sans-serif;
+  padding-block: 15px;
+}
+.folio-facts > div {
+  grid-template-columns: 90px 1fr;
+  padding-block: 9px;
+}
+.folio-facts dt {
+  font:
+    600 12px/1.9 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #665031;
+}
+.folio-text-link {
+  font:
+    400 15px/1.6 Arial,
+    Helvetica,
+    sans-serif;
+  color: #664114;
+}
+.folio-index button {
+  padding-block: 20px;
+  gap: 14px;
+}
+.folio-index strong {
+  font:
+    600 var(--reading-size)/1.45 Arial,
+    Helvetica,
+    sans-serif;
+}
+.folio-index small {
+  font:
+    400 14px/1.6 Arial,
+    Helvetica,
+    sans-serif;
+  color: #615139;
+  margin-top: 8px;
+}
+.folio-dossier > section {
+  margin-top: 32px;
+}
+.folio-dossier h3 {
+  padding-bottom: 12px;
+  margin-bottom: 17px;
+}
+.folio-dossier li {
+  font-size: var(--reading-size);
+  line-height: 1.75;
+  margin-bottom: 19px;
+}
+.folio-dossier ol {
+  list-style-type: decimal;
+}
+.folio-dossier ul {
+  list-style-type: disc;
+}
+.folio-dossier li::marker {
+  font:
+    600 14px Arial,
+    Helvetica,
+    sans-serif;
+}
+.folio-dossier p {
+  line-height: 1.75;
+}
+.folio-tags {
+  gap: 10px 15px;
+}
+.folio-tags span {
+  font:
+    400 14px/1.6 Arial,
+    Helvetica,
+    sans-serif;
+  color: #554126;
+}
+.folio-portals {
+  font:
+    600 15px Arial,
+    Helvetica,
+    sans-serif;
+}
+.folio-dates {
+  font:
+    400 14px/1.6 Arial,
+    Helvetica,
+    sans-serif;
+}
+.folio-timeline button {
+  padding-block: 23px;
+}
+.folio-timeline strong {
+  font:
+    600 27px Georgia,
+    serif;
+}
+.folio-timeline small {
+  font:
+    400 13px/1.6 Arial,
+    Helvetica,
+    sans-serif;
+  color: #665238;
+}
+.folio-timeline span span {
+  font:
+    400 16px/1.5 Arial,
+    Helvetica,
+    sans-serif;
+}
+.folio-overflow-hint {
+  font:
+    400 11px/1.5 Arial,
+    Helvetica,
+    sans-serif;
+  color: #604719;
+}
+.folio-page-number {
+  padding-top: 15px;
+}
+.folio-scroll {
+  scrollbar-color: #8b704b80 transparent;
+  padding-right: 13px;
+}
+.book-bookmarks a {
+  font:
+    600 13px Arial,
+    Helvetica,
+    sans-serif;
+}
+.book-topline a,
+.book-bottomline a {
+  font:
+    400 12px/1.5 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.03em;
+}
+@media (max-width: 1050px) and (min-width: 761px) {
+  .folio-skill-tree {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .folio-skill-tree ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 18px;
+  }
+}
+@media (max-width: 760px) {
+  .book-reader {
+    --reading-size: 16px;
+  }
+  .book-bookmarks {
+    position: sticky;
+    top: 76px;
+    background: #101014;
+    padding-top: 4px;
+    height: 48px;
+  }
+  .book-bookmarks a {
+    font-size: 12px;
+  }
+  .folio-title {
+    font-size: 29px;
+  }
+  .folio-identity h2 {
+    font-size: 25px;
+  }
+  .folio-identity p {
+    font-size: 15px;
+  }
+  .folio-portrait-row {
+    gap: 20px;
+  }
+  .folio-skill-tree {
+    grid-template-columns: 1fr;
+    gap: 23px;
+  }
+  .folio-skill-tree ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+  }
+  .folio-skill-tree h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  .folio-facts > div {
+    grid-template-columns: 75px 1fr;
+    gap: 10px;
+  }
+  .folio-running-head {
+    font-size: 9px;
+  }
+  .folio-scroll {
+    padding-right: 0;
+  }
+  .folio-section-heading > span {
+    font-size: 9px;
+  }
+}
+@media (min-width: 761px) {
+  .folio-portrait img {
+    height: clamp(155px, 12vw, 180px);
+  }
+  .folio-portrait {
+    max-width: 160px;
+  }
+}
+
+/* The physical book stays in the same viewport while paper takes over. */
+.codex-world.artifact-book .artifact-canvas {
+  position: fixed;
+  inset: 0;
+  height: auto;
+}
+.book-return-copy {
+  z-index: 90;
+  pointer-events: none;
+}
+.book-returning .hall-content {
+  animation: hall-after-book 1.45s ease both;
+}
+@keyframes hall-after-book {
+  0%,
+  42% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-returning .hall-content {
+    animation: none;
+  }
+}
+
+@media (min-width: 761px) {
+  .book-reader[data-opening="true"] .book-spread > .folio-left,
+  .book-return-copy .book-spread > .folio-left {
+    visibility: hidden;
+  }
+}
+.cover-crest strong {
+  color: #d2ad64;
+}

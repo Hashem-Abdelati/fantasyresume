@@ -1,0 +1,37 @@
+{
+  "browser": "Installed Google Chrome, headless, 1440×900; development server",
+  "before": {
+    "engine": "three.js r186",
+    "fps": "60.7",
+    "drawCalls": "140",
+    "triangles": "307370",
+    "geometries": "76",
+    "textures": "11"
+  },
+  "after": {
+    "engine": "three.js r186",
+    "fps": "40.9",
+    "drawCalls": "140",
+    "triangles": "307370",
+    "geometries": "77",
+    "textures": "11"
+  },
+  "resources": [
+    {
+      "url": "spellbook.glb",
+      "bytes": 593396,
+      "durationMs": 4
+    },
+    {
+      "url": "satchel.glb",
+      "bytes": 428920,
+      "durationMs": 4
+    },
+    {
+      "url": "raven.glb",
+      "bytes": 319456,
+      "durationMs": 4
+    }
+  ],
+  "errors": []
+}

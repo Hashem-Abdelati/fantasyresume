@@ -71,3 +71,25 @@ export default defineConfig([
   },
 ])
 ```
+
+## Interactive artifact redesign
+
+The portfolio now has a persistent, lazy-loaded Three.js/React Three Fiber study. The Spellbook expands into a full-screen parchment spread for Character, Quests and Journey; the Satchel opens the existing personal inventory; the Raven reveals the existing mailto and social contact interface. All readable content is HTML. Mobile defaults to illustrated artifact navigation with quick professional links and optional 3D.
+
+```sh
+npm install
+npm run dev
+npm run build
+npm run lint
+npm test
+```
+
+Original routes are preserved. `/character`, `/quests`, `/journey`, `/raven`, and `/grand-hall` redirect to the corresponding existing routes. Inventory entries can be linked with `/inventory?artifact=career-goals`. Escape closes the topmost dialog first, then returns from a chapter to the Hall. Dialogs trap and restore focus. Inventory supports dragging and Alt + arrow keys for rearrangement.
+
+Editable content lives in `src/data/quests.ts`, `journey.ts`, `inventory.tsx`, and `navigation.ts`; the Character profile and inline skill tree remain in `src/pages/About.tsx`. Both immersive and fallback modes render the same page components.
+
+See [architecture](docs/ARCHITECTURE.md), [asset provenance and rebuild](docs/ASSETS.md), and [verification](docs/VERIFICATION.md). Blender source and deterministic generators are included in `scripts/`. No sound, analytics or third-party 3D models were added. The journal editor uses a server-only Vercel API and hosted Redis storage. Vercel deep-link rewrites preserve the API route.
+
+### Journal editor
+
+Inventory includes a discreet master-spell editor with private drafts and public publishing. See [live journal setup](docs/JOURNAL.md) for the one-time Vercel database and server credential configuration.
